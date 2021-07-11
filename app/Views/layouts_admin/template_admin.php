@@ -8,8 +8,8 @@
     <link rel="icon" href="/assets/favicon.ico">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="/assets/adminlte3/plugins/fontawesome-free/css/all.min.css">
-    <!-- deterange picker -->
-    <link rel="stylesheet" href="/assets/adminlte3/plugins/deterangepicker/deteranepicker.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="/assets/adminlte3/plugins/daterangepicker/daterangepicker.css">
     <!-- Sweet Alert 2 -->
     <link rel="stylesheet" href="/assets/adminlte3/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
     <!-- Toastr -->
@@ -61,8 +61,8 @@
     <script src="/assets/adminlte3/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- input mask -->
     <script src="/assets/adminlte3/plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
-    <!-- data range picker -->
-    <script src="/assets/adminlte3/plugins/datarangepicker/datarangepicker.js"></script>
+    <!-- date range picker -->
+    <script src="/assets/adminlte3/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- sweet alert 2 -->
     <script src="/assets/adminlte3/plugins/sweetalert2/sweetalert2.min.js"></script>
     <!-- toastr -->
