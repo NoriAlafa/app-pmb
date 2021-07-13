@@ -40,4 +40,26 @@ class Validation
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
+	
+	//validasi data fakultas
+	public $fakultas = [
+		'nama_fakultas'=>[
+			'label' =>'Nama Fakultas',
+			'rules' =>'required',
+			'errors'=>[
+				'required'=>'Nama fakultas tidak boleh kosong!'
+			]
+		]
+	];
+
+	//validasi data prodi
+	public $prodi = [
+		'nama_prodi'=>[
+			'label' =>'Nama Prodi',
+			'rules' =>'required',
+			'errors'=>[
+				'required'=>'Nama prodi tidak boleh kosong'
+			]
+		]
+	];
 }
