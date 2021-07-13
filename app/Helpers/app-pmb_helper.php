@@ -16,7 +16,7 @@ function ubah_tgl1($tanggal){
     $satukan = implode('/',$larik);
     return $satukan;
 }
-function ubah_tgl1($tanggal){
+function ubah_tgl2($tanggal){
     $pisah = explode('/' , $tanggal);
     $larik = array($pisah[1],$pisah[2],$pisah[0]);
     $satukan = implode('/',$larik);
