@@ -112,4 +112,126 @@ class Validation
 			'rules'		  =>'required|min_length[8]|matches[password]'
 		]
 	];
+
+	//validasi login
+	public $login = [
+		'email'=>[
+			'label'		=>'E-mail',
+			'rules'		=>'required|valid_email',
+			'errors'	=>[
+				'required'	 =>'Email tidak boleh kosong!',
+				'valid_email'=>'Email Tidak Valid!'
+			]
+		],
+		'password'=>[
+			'label'		=>'Password',
+			'rules'		=>'required|min_length[8]',
+			'errors'	=>[
+				'required'		=>'Password tidak boleh kosong!',
+				'min_length'	=>'Password Minimal 8 Karakter'
+			]
+		]
+	];
+
+	//validasi pendaftaran tahap satu
+	public $tahap_satu = [
+		'nama_peserta' =>[
+			'label'	   =>'Nama Peserta',
+			'rules'	   =>'required',
+			'errors'   =>[
+				'required' =>'Nama peserta tidak boleh kosong!'
+			]
+		],
+		'tempat_lahir' =>[
+			'label'	   =>'Tempat Lahir',
+			'rules'	   =>'required',
+			'errors'   =>[
+				'required'=>'Tempat lahir harus diisi!'
+			]
+		],
+		'tanggal_lahir'=>[
+			'label'	   =>'Tanggal Lahir',
+			'rules'	   =>'required',
+			'errors'   =>[
+				'required'=>'Tanggal lahir tidak boleh kosong!'
+			]
+		],
+		'jenis_kelamin'=>[
+			'label'	   =>'Jenis Kelamin',
+			'rules'    =>'required',
+			'errors'   =>[
+				'required' =>'Jenis kelamin harus diisi!'
+			]
+		],
+		'agama'	=>[
+			'label'	   =>'Agama',
+			'rules'	   =>'required',
+			'errors'   =>[
+				'required'=>'Agama tidak boleh kosong!'
+			]
+		],
+		'no_hp'=>[
+			'label'	   =>'Nomor Telephone',
+			'rules'	   =>'required|numeric|max_length[14]',
+			'errors'   =>[
+				'required'  =>'Nomor Telephone tidak boleh kosong!',
+				'numeric'   =>'Nomor Telephone tidak valid',
+				'min_length'=>'Masukkan Nomor Telephone dengan benar!'
+			]
+		],
+		'alamat'=>[
+			'label'	  =>'Alamat',
+			'rules'   =>'required',
+			'errors'  =>[
+				'required' =>'Alamat tidak boleh kosong!'
+			]
+		],
+		'nama_orangtua'=>[
+			'label'   =>'Nama Orangtua',
+			'rules'   =>'required',
+			'errors'  =>[
+				'required' =>'Nama orang tua harus diisi!'
+			]
+		],
+		'pekerjaan_orangtua'=>[
+			'label'  =>'Pekerjaan Orangtua',
+			'rules'  =>'required',
+			'errors' =>[
+				'required' =>'Pekerjaan orang tua harus diisi!'
+			]
+		],
+		'no_hp_orangtua'=>[
+			'label'  =>'Nomer Hp orangtua',
+			'rules'  =>'required|numeric|max_length[14]',
+			'errors' =>[
+				'required'	 =>'Nomer hp tidak boleh kosong!',
+				'numeric'	 =>'Nomer hp tidak valid!',
+				'min_length' =>'Masukkan nomer hp dengan benar!'
+			]
+		],
+		'nama_sekolah'=>[
+			'label'  =>'Nama Sekolah',
+			'rules'  =>'required',
+			'errors' =>[
+				'required' =>'Nama sekolah tidak boleh kosong!'
+			]
+		],
+		'tahun_lulus'=>[
+			'label'  =>'Tahun lulus',
+			'rules'  =>'required|numeric|max_length[4]',
+			'errors' =>[
+				'required'  =>'Tahun lulu tidak boleh kosong!',
+				'numeric'   =>'Tahun lulus tidak valid',
+				'min_length'=>'Tahun lulus peserta maksimal 4 angka'
+			]
+		],
+		'alamat_sekolah'=>[
+			'label'  =>'Alamat Sekolah',
+			'rules'  =>'required',
+			'errors' =>[
+				'required' =>'Alamat sekolah tidak boleh kosong!'
+			]
+		],
+
+	];
 }
