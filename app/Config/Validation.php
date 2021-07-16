@@ -234,4 +234,46 @@ class Validation
 		],
 
 	];
+
+	//validasi pendaftaran-tahap dua(fakultas & prodi)
+	public $tahap_dua = [
+		'fakultas_id' => [
+			'label'		=>'Fakultas',
+			'rules'		=>'required',
+			'errors'	=>[
+				'required'=>'Pilihan fakultas tidak boleh kosong!'
+			]
+		],
+		'prodi_id'	=>[
+			'label'		=>'Prodi',
+			'rules'		=>'required',
+			'errors'	=>[
+				'required'=>'Pilihan prodi tidak boleh kosong!'
+			]
+		]
+	];
+
+	//validasi tahap 3
+	public $tahap_tiga = [
+		'foto'=>[
+			'label'		=>'Foto',
+			'rules'		=>'uploaded[foto]|max_size[foto,500]|max_dims[foto,354,472]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg]',
+			'errors'	=>[
+				'uploaded'=>'Foto peserta tidak boleh kosong!',
+				'max_size'=>'Ukuran file foto peserta maksimal 500kb',
+				'max_dims'=>'Ukuran dimensi foto peserta 3x4cm',
+				'is_image'=>'Yang anda pilih bykan gambar!',
+				'mime_in' =>'Format foto peserta tidak sesuai'
+			]
+		],
+		'berkas'=>[
+			'label'		=>'Berkas',
+			'rules'		=>'uploaded[berkas]|max_size[berkas,2048]|ext_in[berkas,pdf]',
+			'errors'	=>[
+				'uploaded'=>'Berkas peserta tidak boleh kosong!',
+				'max_size'=>'Ukuran file berkas peserta maksimal 2mb',
+				'ext_in'  =>'Format file berkas peserta dalam bentuk pdf'
+			]
+		]
+	];
 }
