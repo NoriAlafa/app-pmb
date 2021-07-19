@@ -71,3 +71,59 @@
         <!-- ======AKHIR LOGIN====== -->    
     </main>
 <?=$this->endSection()?>
+
+<?=$this->section('script')?>
+    <script>
+        $(document).ready(function(){
+            //show password
+            $('#show-password').on('click',function(){
+                if($(this).hasClass('icofont-eye-blocked')){
+                    $('#password').attr('type' , 'text');
+                    $(this).removeClass('icofont-eye-blocked');
+                    $(this).addClass('icofont-eye');
+                }else{
+                    $('#password').attr('type' , 'password');
+                    $(this).removeClass('icofont-eye');
+                    $(this).addClass('icofont-eye-blocked');
+                }
+            });
+
+            //submit pendaftaran user
+            $('#btn-login').on('click' , function(){
+                const formLogin = $('#formLogin');
+
+                $.ajax({
+                    url:"login/cekUser",
+                    method:"POST",
+                    data:formLogin.serialize(),
+                    dataType:"JSON",
+                    success: function(data){
+                        //login error
+                        if(data.error){
+                            if(data.login_error['email']!='') $('#email_error').html(data.login_error['email']);
+                            else $('#email_error').html('');
+
+                            if(data.login_error['password']!='') $('#password_error').html(data.login_error['password']);
+                            else $('#password_error').html('');
+                        }
+
+                        //login succes
+                        if(data.success){
+                            formLogin.trigger('reset');
+                            $('#email_error').html('');
+                            $('#password_error').html('');
+                            Swall.fire({
+                                position:'top-end',
+                                icon:'success',
+                                title:'Login Berhasil',
+                                showConfirmButton:false,
+                                timer:1500
+                            });
+                            window.location.replace(data.link);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+<?=$this->endSection()?>
