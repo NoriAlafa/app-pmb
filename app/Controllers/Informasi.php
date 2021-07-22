@@ -40,5 +40,68 @@ class Infromasi extends BaseController{
         return view('v_informasi/index' , $data);
     }
     
+    // Menampilkan informasi pada modal edit informasi
+    public function ajaxUpdate($idInformasi){
+        //cek informasi berdasarkan id
+        $cek = $this->M_informasi->find($idInformasi);
+        $id  = $cek['id'];
+        //ubah format penanggalan melalui helper
+        $tgl_buka       = ubah_tgl2($cek['tgl_buka']);
+        $tgl_tutup      = ubah_tgl2($cek['tgl_tutup']);
+        $tgl_pengumuman = ubah_tgl2($cek['tgl_pengumuman']);
+
+        $data = [
+            'id'                  =>$cek['id'],
+            'tanggal_pendaftaran' =>$tgl_buka." - ".$tgl_tutup,
+            'tanggal_pengumuman'  =>$tgl_pengumuman
+        ];
+
+        echo json_encode($data);
+    }
+
+    //update data informasi 
+    public function update(){
+        $id              = $this->request->getPost('idInformasi');
+        $tgl_pendaftaran = $this->request->getPost('tgl_pendaftaran');
+        $tgl_pengumuman  = $this->request->getPost('tgl_pengumuman');
+
+        //validasi informasi
+        $data = [
+            'tgl_pendaftaran' => $tgl_pendaftaran,
+            'tgl_pengumuman'  => $tgl_pengumuman
+        ];
+
+        //cek validasi informasi , jika data tidak valid
+        if($this->form_validation->run($data,'informasi') == FALSE){
+            $validasi = [
+                'error'     =>true,
+                'info_error'=>$this->form_validation->getErrors()
+            ];
+            echo json_encode($validasi);
+        }
+        //data valid
+        else{
+            //ubah format penanggalan tanggal pendaftaran melalui helper
+            $pisah_tanggal = explode('/',$tgl_pendaftaran);
+            $tgl_buka      = ubah_tgl1($pisah_tanggal[0]);
+            $tgl_tutup     = ubah_tgl1($pisah_tanggal[1]);
+            $tgl_p         = ubah_tgl1($tgl_pengumuman);
+
+            //data update informasi
+            $data1 = [
+                'tgl_buka'       =>$tgl_buka,
+                'tgl_tutup'      =>$tgl_tutup,
+                'tgl_pengumuman' =>$tgl_p
+            ];
+
+            //update informasi
+            $this->M_informasi->update($id , $data1);
+            $validasi = [
+                'success'   =>true
+            ];
+
+            echo json_encode($validasi);
+        }
+    }
 }
 ?>
