@@ -103,5 +103,31 @@ class Infromasi extends BaseController{
             echo json_encode($validasi);
         }
     }
+
+    //datatable server side
+    public function ajaxInformasi(){
+        if($this->request->getMethod(true) == 'POST'){
+            $lists = $this->M_informasi->get_datatables();
+            $data  = [];
+            $no    = $this->request->getPost("start");
+            
+              foreach ($lists as $list) :
+                $no++;
+                $row  = [];
+                $row  = $tgl_indonesia($list->tgl_buka);
+                $row  = $tgl_indonesia($list->tgl_tutup);
+                $row  = $tgl_indonesia($list->tgl_pengumuman);
+                $row  = $this->_action($list->id);
+                $data = $row; 
+              endforeach;
+            
+            $output = [
+                "draw"         =>$this->request->getPost('draw'),
+                "recordsTotal" =>$this->M_informasi->count_all(),
+                "data"         =>$data
+            ];
+            echo json_encode($output);
+        }
+    }
 }
 ?>
