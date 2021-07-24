@@ -46,3 +46,26 @@
     <!-- Modal Edit -->
     <?php include 'edit.php'; ?>
 <?=$this->endSection()?>
+
+<?=$this->section('script')?>
+<script>
+    $(document).ready(function(){
+        // Menampilkan informasi (Data-table-server-side)
+        $('#example1').DataTable({
+            "responsive" : true,
+            "autoWidth"  : false,
+            "processing" : true,
+            "serverSide" : true,
+            "order"      : [],
+            "ajax"       :{
+                "url"    :"informasi/ajaxInformasi",
+                "type"   :"POST"
+            },
+            "columnDefs" :[{
+                "target" :[0],
+                "orderable":false
+            }] 
+        });
+    });
+</script>
+<?=$this->endSection()?>
