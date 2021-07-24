@@ -66,6 +66,13 @@
                 "orderable":false
             }] 
         });
+
+        // Daterangepicker
+        $('#reserVationDate').datetimepicker({
+            format: 'L'
+        });
+        $('#reservation').daterangepicker();
+
     });
 </script>
 <?=$this->endSection()?>
