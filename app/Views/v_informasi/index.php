@@ -73,6 +73,24 @@
         });
         $('#reservation').daterangepicker();
 
+        // Menampilkan modal edit info
+        $('body').on('click','.btn-editInformasi',function(){
+            const idInformasi = $(this).attr('value');
+            $.ajax({
+                url     :"informasi/ajaxUpdate/" + idInformasi,
+                type    :"GET",
+                dataType:"JSON",
+                success :function(data){
+                    $('[name="idInformasi"]').val(data.id);
+                    $('[name="tgl_pendaftaran"]').val(data.tgl_pendaftaran);
+                    $('[name="tgl_pengumuman"]').val(data.tgl_pengumuman);
+                    $('#modalEdit').modal('show');
+                }
+            });
+        });
+
+        // Save update informasi
+
     });
 </script>
 <?=$this->endSection()?>
