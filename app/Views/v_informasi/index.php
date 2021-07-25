@@ -90,7 +90,29 @@
         });
 
         // Save update informasi
+        $('#btn-saveUpdateInformasi').on('click',function(){
+            const formUpdate = $('#formUpdateInformasi');
 
+            $.ajax({
+                url         :"informasi/update",
+                method      :"POST",
+                data        :formUpdate.serialize(),
+                dataType    :"JSON",
+                success     :function(data){
+                    // data error
+                    if(data.error){
+                        if(data.info_error['tgl_pendaftaran'] != '')
+                            $('#tgl_pendaftaran_error').html(data.info_error['tgl_pendaftaran']);
+                        else $('#tgl_pendaftaran_error').html('');
+                        
+                        if(data.info_error['tgl_pengumuman'] != '')
+                            $('#tgl_pengumuman_error').html(data.info_error['tgl_pengumuman']);
+                        else $('#tgl_pengumuman_error').html('');
+                        
+                    }
+                }
+            });
+        });
     });
 </script>
 <?=$this->endSection()?>
