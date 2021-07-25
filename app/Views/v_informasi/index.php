@@ -110,6 +110,16 @@
                         else $('#tgl_pengumuman_error').html('');
                         
                     }
+                    
+                    // data fakultas berhasil disimpan
+                    if(data.success){
+                        formUpdate.trigger('reset');
+                        $('#modalEdit').modal('hide');
+                        $('#tgl_pendaftaran_error').html('');
+                        $('#tgl_pengumuman_error').html('');
+                        $('#example1').DataTable().ajax.reload();
+                        toastr.info('Informasi Berhasil di Update');
+                    }
                 }
             });
         });
