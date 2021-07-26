@@ -45,6 +45,36 @@ class DataFakultas extends BaseController{
         return view('v_dataFakultas/index',$data);
     }
 
+    // Add data fakultas
+    public function add(){
+        $nama_fakultas = ucwords($this->request->getPost('nama'));
+
+        // data fakultas
+        $data =[
+            'nama_fakultas' => $nama_fakultas
+        ];
+
+        // cek validasi data fakultas, jika data tidak valid
+        if($this->form_validation->run($data,'fakultas')==FALSE){
+            $validasi = [
+                'error' =>true,
+                'nama_fakultas_error'=>$this->form_validation->getErrors('nama_fakultas')
+            ];
+            echo json_encode($validasi);
+        }
+        // Data valid
+        else{
+            //simpan data fakultas
+            $this->M_fakultas->save($data);
+            $validasi = [
+                'success' =>true 
+            ];
+            echo json_encode($validasi);
+
+        }
+    }
+
+    // Menampilkan data fakultas pada modal edit data fakultas
     
 }
 ?>
