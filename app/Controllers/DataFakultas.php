@@ -36,6 +36,15 @@ class DataFakultas extends BaseController{
         return $link;
     }
 
+    // Halaman fakultas
+    public function index(){
+        $data['title']  = "Alfa-Univ|Data Fakultas";
+        $data['page']   = "datafakultas";
+        $data['nama']   = $this->session->get('nama');
+        $data['email']  = $this->session->get('email');
+        return view('v_dataFakultas/index',$data);
+    }
+
     
 }
 ?>
