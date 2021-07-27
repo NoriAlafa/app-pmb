@@ -108,6 +108,37 @@ class DataFakultas extends BaseController{
             echo json_encode($validasi);
         }
     }
+
+    // Delete data fakultas
+    public function delete($id){
+        $this->M_fakultas->delete($id);
+    }
+
+    // Datatable server side
+    public function ajaxDataFakultas(){
+        if($this->request->getMethod(true)=='POST'){
+            $lists = $this->M_fakultas->get_datatables();
+            $data  = [];
+            $no    = $this->request->getPost("start");
+
+            foreach ($lists as $list) {
+                $no++;
+                $row = [];
+                $row = $no;
+                $row = $list->nama_fakultas;
+                $row = $this->_action($list->id);
+                $data= $row;
+            }
+
+            $output = [
+                "draw"              => $this->request->getPost('draw'),
+                "recordsTotal"      => $this->M_fakultas->count_all(),
+                "recordsFiltered"   => $this->M_fakultas->count_filtered(),
+                "data"              => $data
+            ];
+            echo json_encode($output);
+        }
+    }
     
 }
 ?>
