@@ -75,6 +75,10 @@ class DataFakultas extends BaseController{
     }
 
     // Menampilkan data fakultas pada modal edit data fakultas
+    public function ajaxUpdate($idFakultas){
+        $data = $this->M_fakultas->find($idFakultas);
+        echo json_encode($data);
+    }
     
 }
 ?>
