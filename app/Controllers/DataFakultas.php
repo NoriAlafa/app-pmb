@@ -80,5 +80,34 @@ class DataFakultas extends BaseController{
         echo json_encode($data);
     }
     
+    // update data fakultas
+    public function update(){
+        $id            =$this->request->getPost('idFakultas');
+        $nama_fakultas =ucwords($this->request->getPost('nama_fakultas'));
+
+        // data fakultas
+        $data = [
+            'nama_fakultas' =>$nama_fakultas
+        ];
+
+        // cek validasi data fakultas jika data tidak valid
+        if($this->form_validation->run($data,'fakultas')==FALSE){
+            $validasi = [
+                'error'               =>true,
+                'nama_fakultas_error' =>$this->form_validation->getErrors('nama_fakultas')
+            ];
+            echo json_encode($validasi);
+        }
+        // data valid
+        else{
+            // update data fakultas
+            $this->M_fakultas->update($id,$data);
+            $validasi = [
+                'success' =>true 
+            ];
+            echo json_encode($validasi);
+        }
+    }
+    
 }
 ?>
