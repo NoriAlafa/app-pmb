@@ -1,0 +1,1 @@
+<?=$this->extends('layouts_admin/template_admin')?>
