@@ -48,5 +48,30 @@
             </div>
         </section>
         <!-- modal edit -->
+        <?php include 'edit.php'?>
     </div>
+<?=$this->endSection()?>
+
+<?=$this->section('script')?>
+    <script>
+        $(document).ready(function(){
+            // menapilkan data fakultas
+            $('#example1').DataTable({
+                "responsive":true,
+                "autoWidth" :false,
+                "processing":true,
+                "serverSide":true,
+                "order"     :[],
+                "ajax"      :{
+                    "url"   :"datafakultas/ajaxDataFakultas",
+                    "type"  :"POST"
+                },
+                "columnDefs":[{
+                    "target":[0],
+                    "orderable":false
+                }]
+            });
+            
+        });
+    </script>
 <?=$this->endSection()?>
