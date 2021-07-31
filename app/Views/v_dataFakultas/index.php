@@ -72,6 +72,35 @@
                 }]
             });
             
+            // save input data fakultas
+            $('#btn-saveDataFakultas').on('click',function(){
+                const formInput = $('#formInputDataFakultas');
+                $.ajax({
+                    url         :"datafakultas/add",
+                    method      :"POST",
+                    data        :formInput.serialize(),
+                    dataType    :"JSON",
+                    success     :function(data){
+                        // data error
+                        if(data.error){
+                            if(data.nama_fakultas_error['nama_fakultas'] != ''){
+                                $('#nama_fakultas_error').html(data.nama_fakultas_error['nama_fakultas']);
+                            }else{
+                                $('#nama_fakultas_error').html('');
+                            }
+                        }
+                    // data tdk error
+                    if(data.success){
+                        formInput.trigger('reset');
+                        $('#modalAdd').modal(hide);
+                        $('#nama_fakultas_error').html('');
+                        $('#example1').DataTable().ajax.reload();
+                        toastr.success('Data Fakultas Berhasil Disimpan');
+                    }
+                    }
+
+                });
+            });
         });
     </script>
 <?=$this->endSection()?>
