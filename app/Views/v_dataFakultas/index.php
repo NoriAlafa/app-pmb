@@ -101,6 +101,22 @@
 
                 });
             });
+
+            // Menampilkan modal edit data fakultas
+            $('body').on('click','.btn-editFakultas',function(){
+                const idFakultas = $(this).attr('value');
+                $.ajax({
+                    url         :"datafakultas/ajaxUpdate/"+idFakultas,
+                    type        :"GET",
+                    dataType    :"JSON",
+                    success     :function(data){
+                        $('[name="idFakultas"]').val(data.id);
+                        $('[name="nama_fakultas2"]').val(data.nama_fakultas);
+                        $('#modalEdit').modal(show);
+                    }
+                });
+            });
+            
         });
     </script>
 <?=$this->endSection()?>
