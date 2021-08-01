@@ -116,7 +116,37 @@
                     }
                 });
             });
-            
+
+            // save update data fakultas
+            $('#btn-updateDataFakultas').on('click',function(){
+                const formUpdate = $('#formUpdateDataFakultas');
+                $.ajax({
+                    url         :"datafakultas/update",
+                    method      :"POST",
+                    data        :formUpdate.serialize(),
+                    dataType    :"JSON",
+                    success     :function(data){
+                        // data error
+                        if(data.error){
+                            if(data.nama_fakultas_error['nama_fakultas'] !=''){
+                                $('#nama_fakultas2_error').html(data.nama_fakultas_error['nama_fakultas']);
+                            }else{
+                                $('#nama_fakultas2_error').html('');
+                            }
+                        }
+                        // data success
+                        if(data.success){
+                            formUpdate.trigger('reset');
+                            $('#modalEdit').modal('hide');
+                            $('#nama_fakultas2_error').html('');
+                            $('#example1').DataTable().ajax.reload();
+                            toastr.info('Data Fakultas Berhasil Di Simpan');
+                        }
+                    }
+                });
+            });
+
+            // hapus data informasi jabatan
         });
     </script>
 <?=$this->endSection()?>
