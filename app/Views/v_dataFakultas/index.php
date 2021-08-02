@@ -147,6 +147,30 @@
             });
 
             // hapus data informasi jabatan
+            $('body').on('click','.btn-deleteFakultas',function(e){
+                e.preventDefault();
+                const url = $(this).attr('href');
+                Swal.fire({
+                    title               :'Hapus data?',
+                    text                :"Anda ingin menghapus data fakultas ini?",
+                    icon                :'warning',
+                    showCancelButton    :true,
+                    confrimButtonColor  :'#3085d6',
+                    cancelButtonColor   :'#d33',
+                    confirmButtonText   :'Yes, Delete It!'
+                }).then(result()=>{
+                    if(result.value){
+                        $.ajax({
+                            url:url,
+                            method:"POST",
+                            success:function(response){
+                                $('#example1').DataTable().ajax.reload();
+                                toastr.info('Data Fakultas Berhasil diHapus');
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 <?=$this->endSection()?>
