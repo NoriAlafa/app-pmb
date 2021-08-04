@@ -36,5 +36,25 @@ class DataProdi extends BaseController{
             </a>";
         return $link;
     }
+
+    // Halaman data prodi
+    public function index($idFakultas){
+        $data['title']  = "Alfa Univ|Data Prodi";
+        $data['page']   = "dataprodi";
+        $data['nama']   = $this->session->get('nama');
+        $data['email']  = $this->session->get('email');
+
+        // cek data fakultas berdasarkan id
+        $cekFakultas            = $this->M_fakultas->where('id',$idFakultas)->first();
+        $data['nama_fakultas']  = $cekFakultas['nama_fakultas'];
+        $data['id_fakultas']    = $cekFakultas['id'];
+
+        // jika data ada
+        if($cekFakultas){
+            return view('v_dataProdi/index',$data);
+        }else{
+            return view('v_dataProdi/error',$data);
+        }
+    }
 }
 ?>
