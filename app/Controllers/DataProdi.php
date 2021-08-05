@@ -86,5 +86,11 @@ class DataProdi extends BaseController{
             echo json_encode($validasi);
         }
     }
+
+    // Menampilkan data prodi pada modal edit data prodi
+    public function ajaxUpdate($idProdi){
+        $data = $this->M_prodi->find($idProdi);
+        echo json_encode($data);
+    }
 }
 ?>
