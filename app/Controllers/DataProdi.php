@@ -92,5 +92,30 @@ class DataProdi extends BaseController{
         $data = $this->M_prodi->find($idProdi);
         echo json_encode($data);
     }
+
+    // Update data prodi
+    public function update(){
+        $id         = $this->request->getPost('fakultas_id');
+        $nama_prodi = ucwords($this->request->getPost('nama_prodi'));
+        // data fakultas
+        $data = [
+            'nama_prodi'    => $nama_prodi
+        ];
+        // cek validasi data fakultas,jika tidak valid
+        if($this->form_validation->run($data,'prodi')==FALSE){
+            $validasi = [
+                'error'             =>true,
+                'nama_prodi2_error' => $this->form_validation->getErrors('nama_prodi')
+            ];
+            echo json_encode($validasi);
+        }else{
+            // update data fakultas
+            $this->M_prodi->update($id,$data);
+            $validasi = [
+                'success' =>true 
+            ];
+            echo json_encode($validasi);
+        }
+    }
 }
 ?>
