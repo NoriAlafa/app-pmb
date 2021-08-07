@@ -117,5 +117,32 @@ class DataProdi extends BaseController{
             echo json_encode($validasi);
         }
     }
+    
+    // Delete data prodi
+    public function delete($id){
+        $this->M_prodi->delete($id);
+    }
+
+    // Datatable server side
+    public function ajaxDataProdi($idFakultas){
+        if($this->request->getMethod(true)=='POST'){
+            $lists = $this->M_prodi->get_datatables($idFakultas);
+            foreach ($lists as $list) {
+                $no++;
+                $row   =[];
+                $row[] =$no;
+                $row[] =$list->nama->prodi;
+                $row[] =$this->_action($list->id);
+                $data[]=$row;
+            }
+            $output = [
+                "draw"              => $this->request->getPost('draw'),
+                "recordsTotal"      => $this->M_prodi->count_all($idFakultas),
+                "recordsFiltered"   => $this->M_prodi->count_filtered($idFakultas),
+                "data"              =>$data
+            ];
+            echo json_encode($output);
+        }
+    }
 }
 ?>
