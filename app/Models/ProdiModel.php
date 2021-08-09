@@ -25,6 +25,31 @@ class ProdiModel extends Model{
     private function _tbl_prodi($idFakultas){
         $this->dt->where('fakultas_id',$idFakultas);
     }
+
+    private function _get_datatables_query($idFakultas){
+        $this->_tbl_prodi($idFakultas);
+        $i = 0;
+        foreach ($this->column_search as $item) {
+            if($this->request->getPost('search')['value']){
+                if($i===0){
+                    $this->dt->groupStart();
+                    $this->dt->like($item,$this->request->getPost('search')['value']);
+                }else{
+                    $this->dt->orLike($item,$this->request->getPost('search')['value']);
+                }
+
+                if(count($this->column_search) - 1 == $i){
+                    $this->dt->groupEnd();
+                }
+            }
+            $i++;
+        }
+
+        if($this->request->getPost('order')){
+            $this->dt->orderBy($this->column_order[$this->request->getPost('order')['0']['column']],
+            $this->request->getPost('order')['0']['dir']);
+        }
+    }
     
 }
 ?>
