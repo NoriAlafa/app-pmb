@@ -48,7 +48,28 @@ class ProdiModel extends Model{
         if($this->request->getPost('order')){
             $this->dt->orderBy($this->column_order[$this->request->getPost('order')['0']['column']],
             $this->request->getPost('order')['0']['dir']);
+        }else if(isset($this->order)){
+            $order = $this->order;
+            $this->dt->orderBy(key($order),$order[key($order)]);
         }
+    }
+
+    function get_datatables($idFakultas){
+        $this->_get_datatables_query($idFakultas);
+        if($this->request->getPost('length')!= -1)
+        $this->dt->limit($this->request->getPost('length'),$this->request->getPost('start'));
+        $query = $this->dt->get();
+        return $query->getResult();
+    }
+
+    function count_filtered($idFakultas){
+        $this->_get_datatables_query($idFakultas);
+        return $this->dt->countAllResults();
+    }
+
+    public function count_all($idFakultas){
+        $tbl_storage = $this->db->table($this->table)->select('*')->where('fakultas_id',$idFakultas);
+        return $tbl_storage->countAllResults();
     }
     
 }
