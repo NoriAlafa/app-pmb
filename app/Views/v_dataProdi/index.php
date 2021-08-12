@@ -55,3 +55,27 @@
         <?php include 'edit.php';?>
     </div>
 <?=$this->endSection()?>
+
+<?=$this->section('script')?>
+    <script>
+        <?php $link = base_url('dataprodi/ajaxDataProdi/'.$id_fakultas);?>
+        $(document).ready(function(){
+            // menampilkan data prodi (dataTable server-side)
+            $('#example1').DataTable({
+                "responsive":true,
+                "autoWidth":false,
+                "processing":true,
+                "serverSide":true,
+                "order":[],
+                "ajax":{
+                    url:"<?= $link;?>",
+                    "type":"POST"
+                },
+                "columnDefs":[{
+                    "target":[0],
+                    "orderable":false
+                }]
+            });
+        });
+    </script>
+<?=$this->endSection()?>
