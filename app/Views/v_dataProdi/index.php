@@ -76,6 +76,37 @@
                     "orderable":false
                 }]
             });
+
+            // save input data prodi
+            $("#btn-saveDataProdi").on('click',function(){
+                const formInput = $('#formInputDataProdi');
+                $.ajax({
+                    url         :"<?= base_url('dataprodi/add') ?>",
+                    method      :"POST",
+                    data        :formInput.serialize(),
+                    dataType    :"JSON",
+                    success     :function(data){
+                        // data error
+                        if(data.error){
+                            if(data.nama_prodi_error['nama_prodi']!=''){
+                                $('#nama_prodi_error').html(data.nama_prodi_error['nama_prodi']);
+                            }else{
+                                $('#nama_prodi_error').html('');
+                            }
+                        }
+                        // data fakultas berhasil disimpan
+                        if(data.success){
+                            formInput.trigger('reset');
+                            $('#modalAdd').modal('hide');
+                            $('#nama_prodi_error').html('');
+                            $('#example1').DataTable().ajax.reload();
+                            toastr.success('Data Prodi Berhasil DiSimpan');
+                        }
+                    }
+                });
+            });
+
+            // menampilkan modal edit data prodi
         });
     </script>
 <?=$this->endSection()?>
