@@ -107,6 +107,21 @@
             });
 
             // menampilkan modal edit data prodi
+            $('body').on('click','.btn-editProdi',function(){
+                const idProdi = $(this).attr('value');
+                $.ajax({
+                    url         :"<?=site_url('dataprodi/ajaxUpdate/')?>" + idProdi,
+                    type        :"GET",
+                    dataType    :"JSON",
+                    success     :function(data){
+                        $('[name="idProdi"]').val(data.id);
+                        $('[name="nama_prodi2"]').val(data.nama_prodi);
+                        $('#modalEdit').modal('show');
+                    }
+                });
+            });
+
+            // Save update data prodi
         });
     </script>
 <?=$this->endSection()?>
