@@ -122,6 +122,35 @@
             });
 
             // Save update data prodi
+            $('#btn-updateDataProdi').on('click',function(){
+                const formUpdate = $('#formUpdateDataProdi');
+                $.ajax({
+                    url         :"<?=base_url('dataprodi/update')?>",
+                    method      :"POST",
+                    data        :formUpdate.serialize(),
+                    dataType    :"JSON",
+                    success     :function(data){
+                        // data error
+                        if(data.error){
+                            if(data.nama_prodi2_error['nama_prodi'] !=''){
+                                $('#nama_prodi2_error').html(data.nama_prodi2_error['nama_prodi']);
+                            }else{
+                                $('#nama_prodi2_error').html('');
+                            }
+                        }
+                        // data berhasil disimpan
+                        if(data.success){
+                            formUpdate.trigger('reset');
+                            $('#modalEdit').modal('hide');
+                            $('#nama_prodi2_error').html('');
+                            $('example1').DataTable().ajax.reload();
+                            toastr.info('Data Prodi Berhasil Disimpan');
+                        }
+                    }
+                });
+            });
+
+            // Hapus data formasi prodi
         });
     </script>
 <?=$this->endSection()?>
