@@ -151,6 +151,30 @@
             });
 
             // Hapus data formasi prodi
+            $('body').on('click','.btn-deleteProdi',function(e){
+                e.preventDefault();
+                const url = $(this).attr('href');
+                Swall.fire({
+                    title               :"Hapus Data",
+                    text                :"Anda Ingin Menghapus Data Prodi Ini?",
+                    icon                :"warning",
+                    showCancelButton    :true,
+                    confirmButtonColor  :'#3085d6',
+                    cancelButtonColor   :'#d33',
+                    confirmButtonText   :'Yes Delete It!'
+                }).then((result)=>{
+                    if(result.value){
+                        $.ajax({
+                            url:url,
+                            method:"POST",
+                            success:function(response){
+                                $('#example1').DataTable().ajax.reload()
+                                toastr.info('Data Prodi berhasil di hapus');
+                            }
+                        });
+                    }
+                });
+            });
         });
     </script>
 <?=$this->endSection()?>
