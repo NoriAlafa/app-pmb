@@ -33,6 +33,19 @@ class DataPendaftaran extends BaseController{
             </a>";
             return $link;
         }
+        else{
+            $link = "
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
+                
+            </a>
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
+
+            </a>
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
+
+            </a>
+            ";
+        }
     }
     
 }
