@@ -28,23 +28,30 @@ class DataPendaftaran extends BaseController{
             $link = 
             "<a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."' class='btn-viewPendaftaran' data-toggle='tooltip' data-placement='top' title='View'>
                 <button type='button' class='btn btn-outline-primary btn-xs'>
-                    <i class='fas fa-eye'></i>
+                    <i class='far fa-eye'></i>
                 </button>
             </a>";
             return $link;
         }
         else{
             $link = "
-            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
-                
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."' class='btn-viewPendaftaran' data-toggle='tooltip' data-placement='top' title='View'>
+                <button class='btn btn-outline-primary btn-xs' type='button'>
+                    <i class='far fa-eye'></i>
+                </button>
             </a>
-            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
-
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."' class='btn-lulusPendaftaran' data-toggle='tooltip' data-placement='top' title='Lulus'>
+                <button class='btn btn-outline-success btn-xs' type='button'>
+                    <i class='fas fa-check'></i>
+                </button>
             </a>
-            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."'>
-
+            <a href='".base_url('datapendaftaran/view/'.$idPendaftaran)."' class='btn-tidakLulusPendaftaran' data-toggle='tooltip' data-placement='top' title='Tidak Lulus'>
+                <button class='btn btn-outline-danger btn-xs' type='button'>
+                    <i class='fas fa-times'></i>
+                </button>
             </a>
             ";
+            return $link;
         }
     }
     
