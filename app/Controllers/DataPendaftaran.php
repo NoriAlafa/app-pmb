@@ -54,6 +54,15 @@ class DataPendaftaran extends BaseController{
             return $link;
         }
     }
+
+    // Halaman Data Pedaftaran
+    public function index(){
+        $data['title'] = "Alfa Univ|Data Pendaftaran" ;
+        $data['page'] = "datapendaftaran";
+        $data['nama'] = $this->session->get('nama');
+        $data['email'] = $this->session->get('email');
+        return view('v_datapendaftaran/index',$data);
+    }
     
 }
 ?>
