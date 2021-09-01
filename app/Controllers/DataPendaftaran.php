@@ -64,5 +64,18 @@ class DataPendaftaran extends BaseController{
         return view('v_datapendaftaran/index',$data);
     }
     
+    //Halaman view pendaftaran
+    public function view($id){
+        $data['title']  = 'Alfa Univ|View Data Pendaftaran';
+        $data['page']   = 'datapendaftaran';
+        $data['nama']   = $this->session->get('nama');
+        $data['email']  = $this->session->get('email');
+
+        // cek pendaftaran berdasarkan id pendaftaran
+        $cekPendaftaran     = $this->M_pendaftaran->where('id',$id)->first();
+        $status_pendaftaran = $cekPendaftaran['status_pendaftaran'];
+        $fakultas_id        = $cekPendaftaran['fakultas_id'];
+        $prodi_id           = $cekPendaftaran['prodi_id'];
+    }
 }
 ?>
