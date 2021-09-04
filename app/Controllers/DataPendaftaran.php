@@ -58,8 +58,8 @@ class DataPendaftaran extends BaseController{
     // Halaman Data Pedaftaran
     public function index(){
         $data['title'] = "Alfa Univ|Data Pendaftaran" ;
-        $data['page'] = "datapendaftaran";
-        $data['nama'] = $this->session->get('nama');
+        $data['page']  = "datapendaftaran";
+        $data['nama']  = $this->session->get('nama');
         $data['email'] = $this->session->get('email');
         return view('v_datapendaftaran/index',$data);
     }
@@ -76,6 +76,18 @@ class DataPendaftaran extends BaseController{
         $status_pendaftaran = $cekPendaftaran['status_pendaftaran'];
         $fakultas_id        = $cekPendaftaran['fakultas_id'];
         $prodi_id           = $cekPendaftaran['prodi_id'];
+
+        // cek data pendaftaran ada
+        if($cekPendaftaran){
+            // jika sudah selesai
+            if($status_pendaftaran == "Selesai"){
+                $data['pendaftaran'] = $cekPendaftaran;
+            }
+            
+            // fakultas
+            $cekFakultas = $this->$M_fakultas->where('id',$fakultas_id)->first();
+            $data['nama_fakultas'] = $cekFakultas['nama_fakultas'];
+        }
     }
 }
 ?>
