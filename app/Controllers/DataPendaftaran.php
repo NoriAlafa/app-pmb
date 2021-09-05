@@ -87,6 +87,11 @@ class DataPendaftaran extends BaseController{
             // fakultas
             $cekFakultas = $this->$M_fakultas->where('id',$fakultas_id)->first();
             $data['nama_fakultas'] = $cekFakultas['nama_fakultas'];
+
+            // Prodi
+            $cekProdi = $this->M_prodi->where('id',$prodi_id)->first();
+            $data['nama_prodi'] =$cekProdi['nama_prodi'];
+            return view('v_dataPendaftaran/view',$data);
         }
     }
 }
