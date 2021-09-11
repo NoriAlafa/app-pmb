@@ -93,6 +93,10 @@ class DataPendaftaran extends BaseController{
             $data['nama_prodi'] =$cekProdi['nama_prodi'];
             return view('v_dataPendaftaran/view',$data);
         }
+        // Data pendaftaran tidak ada
+        else{
+            return view('v_dataPendaftaran/error',$data);
+        }
     }
 }
 ?>
