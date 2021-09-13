@@ -98,5 +98,15 @@ class DataPendaftaran extends BaseController{
             return view('v_dataPendaftaran/error',$data);
         }
     }
+    // lulus
+    public function lulus($id){
+        //data pendaftaran
+        $data = [
+            'status_verifikasi' =>'Lulus'
+        ];
+
+        //update data pendaftaran
+        $this->M_pendaftaran->update($id,$data);
+    }
 }
 ?>
