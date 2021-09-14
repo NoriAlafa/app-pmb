@@ -108,5 +108,14 @@ class DataPendaftaran extends BaseController{
         //update data pendaftaran
         $this->M_pendaftaran->update($id,$data);
     }
+    // Tidak lulus
+    public function tidakLUlus($id){
+        $data = [
+            'status_verifikasi' =>"Tidak Lulus"
+        ];
+
+        //update
+        $this->M_pendaftaran->update($id,$data);
+    }
 }
 ?>
