@@ -117,5 +117,34 @@ class DataPendaftaran extends BaseController{
         //update
         $this->M_pendaftaran->update($id,$data);
     }
+
+    // Datatable server side
+    public function ajaxDataPendaftara(){
+        if($this->request->getMethod(true)=='POST'){
+            $lists = $this->M_pendaftaran->get_datatables();
+            $data  = [];
+            $no    = $this->request->getPost("start");
+            foreach ($lists as $list){
+                $no++;
+                $row    = [];
+                $row[]  = $no;
+                $row[]  = $list->nomor_pendaftaran;
+                $row[]  = $list->nama_peserta;
+                $row[]  = $list->nama_prodi;
+                $row[]  = tgl_indonesia($list->tanggal_pendaftaran);
+                $row[]  = $list->status_verifikasi;
+                $row[]  = $this->_action($list->id,$list->status_verifikasi);
+                $data[] = $row;
+            }
+            $output = [
+                "draw"              => $this->request->getPost('draw'),
+                "recordsTotal"      => $this->M_pendaftaran->count_all(),
+                "recordsFiltered"   => $this->M_pendaftaran->count_filtered(),
+                "data"              => $data
+            ];
+
+            echo json_encode($output);
+        }
+    }
 }
 ?>
